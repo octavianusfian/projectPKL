@@ -1,0 +1,121 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    height: 100%;
+    background-color: #fafafa;
+}
+
+
+.foto-login{
+    background-image: url("../img/login.png");
+    background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    height: 100vh;
+}
+
+h1{
+    font-weight: 600;
+}
+
+
+
+.navbar .container-fluid, 
+.navbar-expand-lg .navbar-collapse, 
+.navbar-expand-lg .navbar-nav{
+  flex-direction: column;
+  align-items: flex-start;
+  
+} 
+
+.navbar-brand {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 0;
+    
+  
+  }
+
+.navbar-brand img{
+  width: 164px;
+}
+
+
+  .navbar {
+    align-items: flex-start;
+  } 
+
+.menu{
+  font-size: 1.2em; 
+}
+
+header{
+  background-color: white;
+}
+
+header h1{
+  font-size: 2em;
+}
+
+.konten{
+  background-color: white;
+  border: 1px solid black;
+}
+
+.konten h3{
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+thead{
+  background-color: #D62C20;
+  color: white;
+}
+
+.page-item a{
+  background-color: #fafafa;
+  color: black;
+}
+
+
+.pagination a.active {
+  background-color: #D62C20;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 992px) {
+  
+  .navbar .container-fluid, 
+  .navbar-expand-lg .navbar-collapse, 
+  .navbar-expand-lg .navbar-nav{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar {
+    width: 20%;
+    height: 100vh;
+    background-color: white;
+    align-items: flex-start;
+    }
+  
+  form input {
+    margin-bottom: 0.7em;
+    }
+  }
