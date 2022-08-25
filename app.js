@@ -108,6 +108,22 @@ app.get("/me/genset", function(req, res){
     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Genset"});
 });
 
+app.get("/me/s&h", function(req, res){
+    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Suhu and Humidity"});
+});
+
+// Security
+
+app.get("/security/sec", function(req, res){
+    res.render("security.ejs", {currentTime: currentTime, subdivisi: "SEC"});
+});
+
+app.get("/security/btv", function(req, res){
+    res.render("security.ejs", {currentTime: currentTime, subdivisi: "Buku Tamu Vendor"});
+});
+
+
+
 
 app.listen(3000, function(){
     console.log("Server started in port 3000")
