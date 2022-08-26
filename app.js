@@ -5,7 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
-
+const _ = require("lodash");
 
 const app = express();
 
@@ -72,55 +72,65 @@ app.post("/", function(req, res){
 
 });
 
-app.get("/me/logactivity", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Log Activity & Event"});
+app.get("/me/:meSubMenu", function(req, res){
+    const subMenu = _.startCase(req.params.meSubMenu);
+    res.render("me.ejs", {currentTime: currentTime, subdivisi: subMenu});
 });
 
-app.get("/me/solar", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Solar"});
+// app.get("/me/logactivity", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Log Activity & Event"});
+// });
+
+// app.get("/me/solar", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Solar"});
+// });
+
+// app.get("/me/trafo", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Trafo"});
+// });
+
+// app.get("/me/pln", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Perusahaan Listrik Negara (PLN)"});
+// });
+
+// app.get("/me/cubicle", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Cubicle"});
+// });
+
+// app.get("/me/crane", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Crane"});
+// });
+
+// app.get("/me/lvmdp", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "LVMDP"});
+// });
+
+// app.get("/me/pdam", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "PDAM"});
+// });
+
+// app.get("/me/genset", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Genset"});
+// });
+
+// app.get("/me/s&h", function(req, res){
+//     res.render("me.ejs", {currentTime: currentTime, subdivisi: "Suhu and Humidity"});
+// });
+
+// // Security
+
+app.get("/security/:meSubMenu", function(req, res){
+    const subMenu = _.startCase(req.params.meSubMenu);
+    res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu});
 });
 
-app.get("/me/trafo", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Trafo"});
-});
+// app.get("/security/sec", function(req, res){
+//     res.render("security.ejs", {currentTime: currentTime, subdivisi: "SEC"});
+// });
 
-app.get("/me/pln", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Perusahaan Listrik Negara (PLN)"});
-});
-
-app.get("/me/cubicle", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Cubicle"});
-});
-
-app.get("/me/crane", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Crane"});
-});
-
-app.get("/me/lvmdp", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "LVMDP"});
-});
-
-app.get("/me/pdam", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "PDAM"});
-});
-
-app.get("/me/genset", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Genset"});
-});
-
-app.get("/me/s&h", function(req, res){
-    res.render("me.ejs", {currentTime: currentTime, subdivisi: "Suhu and Humidity"});
-});
-
-// Security
-
-app.get("/security/sec", function(req, res){
-    res.render("security.ejs", {currentTime: currentTime, subdivisi: "SEC"});
-});
-
-app.get("/security/btv", function(req, res){
-    res.render("security.ejs", {currentTime: currentTime, subdivisi: "Buku Tamu Vendor"});
-});
+// app.get("/security/btv", function(req, res){
+//     res.render("security.ejs", {currentTime: currentTime, subdivisi: "Buku Tamu Vendor"});
+// });
 
 
 
