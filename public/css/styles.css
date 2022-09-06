@@ -29,6 +29,7 @@ h1{
 .navbar-expand-lg .navbar-nav{
   flex-direction: column;
   align-items: flex-start;
+
   
 } 
 
@@ -61,10 +62,11 @@ header h1{
   font-size: 2em;
 }
 
-.konten{
-  background-color: white;
-  /* border: 1px solid black; */
+header p{
+  font-size: 1em;
 }
+
+
 
 .konten h3{
   font-weight: 500;
@@ -91,6 +93,93 @@ thead{
   margin-top: 70%;
   /* border: 1px solid black; */
 }
+
+.konten h2{
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+
+
+.db_menu{
+  padding: 20px;
+  background-color: white;
+  color: black;
+  width: 32%;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+}
+
+.db_menu h2{
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.db_menu h3{
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+.db_menu p{
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.garis{
+  border-left: 2px solid black;
+  
+}
+
+
+
+.grafikMenu{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #D62C20;
+}
+
+.anyClass {
+  height:100vh;
+  overflow-y: scroll;
+  
+}
+
+.update-box-1{
+  
+  background-color: white;
+  padding: 20px;
+  width: 32%;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+  
+}
+
+.update-box-1 h3{
+  font-size: 1.5em;
+}
+
+.update-box-2{
+  
+  background-color: white;
+  padding: 20px;
+  width: 66%;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
+  
+}
+
+.update-box h3{
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.bulat{
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+
 
 
 
