@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse px-2" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Dashboard</a>
+              <a class="nav-link" aria-current="page" href="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mechanical & Electrical </a>
@@ -55,7 +55,7 @@
       </div>
     </nav>
 
-    <div class="flex-grow-1 container-fluid">
+    <div class="flex-grow-1 container-fluid anyClass">
       <header>
         <div class="row justify-content-between p-4 align-items-center">
           <div class="col-9">
@@ -66,15 +66,14 @@
           </div>
         </div>
       </header>
-      <main class="p-4">
+      <main class="py-4 ">
         <section class="konten p-3">
           <div class="row mb-4">
             <div class="col-9">
               <h3><%= subdivisi%></h3>
             </div>
             <div class="col-3 d-flex justify-content-end">
-              <a class="btn btn-danger" href="#" role="button">Activity</a>
-              <a class="btn btn-light" href="#" role="button">Event</a>
+              
               <a class="btn btn-light ms-2" href="#" role="button">
                 <img src="img/Filter.svg" alt="">
                 Filter
@@ -87,19 +86,13 @@
               <table class="table table-striped table-bordered">
                 <thead >
                   <tr>
-                    <th scope="col">Tanggal</th>
-                    <th scope="col">ME</th>
-                    <th scope="col">Security</th>
-                    <th scope="col">HK</th>
+                    <th scope="col"><%= rows[0].TANGGAL%></th>
+                    <th scope="col"><%= rows[0].SECURITY %></th>
+                    <th scope="col"><%= rows[0].ME %></th>
+                    <th scope="col"><%= rows[0].HK %></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row"><%= rows[0].TANGGAL%></th>
-                    <td><%= rows[0].SECURITY %></td>
-                    <td><%= rows[0].ME %></td>
-                    <td><%= rows[0].HK %></td>
-                  </tr>
                   <tr>
                     <th scope="row"><%= rows[1].TANGGAL%></th>
                     <td><%= rows[1].SECURITY %></td>
@@ -113,16 +106,22 @@
                     <td><%= rows[2].HK %></td>
                   </tr>
                   <tr>
-                    <th scope="row"><%= rows[2].TANGGAL%></th>
+                    <th scope="row"><%= rows[3].TANGGAL%></th>
                     <td><%= rows[3].SECURITY %></td>
                     <td><%= rows[3].ME %></td>
                     <td><%= rows[3].HK %></td>
                   </tr>
                   <tr>
-                    <th scope="row"><%= rows[2].TANGGAL%></th>
+                    <th scope="row"><%= rows[4].TANGGAL%></th>
                     <td><%= rows[4].SECURITY %></td>
                     <td><%= rows[4].ME %></td>
                     <td><%= rows[4].HK %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><%= rows[5].TANGGAL%></th>
+                    <td><%= rows[5].SECURITY %></td>
+                    <td><%= rows[5].ME %></td>
+                    <td><%= rows[5].HK %></td>
                   </tr>
                  
                 </tbody>

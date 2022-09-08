@@ -68,15 +68,20 @@ app.post("/", function(req, res){
             if(foundUser){
                 if(foundUser.password === password){
                     res.redirect("/dashboard");
-                }
+                }else{
+                    res.render("wrongPassword.ejs");}
             }else{
-                res.send("Salah Password")
+                res.render("wrongPassword.ejs");
             }
         }
     })
 
 
 });
+
+// app.get("/wrongPassword", function(req, res){
+//     res.render("wrongPassword.ejs");
+// })
 
 app.get("/dashboard", function(req, res){
     res.render("dashboard.ejs", {currentTime: currentTime});
@@ -158,8 +163,8 @@ app.get("/security/:meSubMenu", async function(req, res){
         
     // read rows
     const rows = await sheet.getRows({
-        offset: 0,
-        limit: 5
+        offset: -1,
+        limit: 15
     });
 
 
