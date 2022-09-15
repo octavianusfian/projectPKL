@@ -90,9 +90,13 @@ h1{
 }
 
 
-  .navbar {
+.navbar {
     align-items: flex-start;
-  } 
+} 
+
+.navbar a{
+  font-size: 1.2vw;
+}
 
 .menu{
   font-size: 1.2em; 

@@ -9,14 +9,28 @@ const _ = require("lodash");
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const fs = require("fs");
 const { google } = require("googleapis");
+const session = require('express-session');
+const passport =  require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+// const { SetupPagination, PaginationButton } = require('./pagination');
+
 
 const app = express();
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({
-    extended: true
+
+
+app.use(session({
+    secret: "this is our secret",
+    resave: false,
+    saveUninitialized: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(bodyParser.urlencoded({extended: false}));
 
 const time = new Date();
 
@@ -41,13 +55,23 @@ const currentTime = `${hours} | ${day}, ${time.getDate()} ${month} ${time.getFul
 
 mongoose.connect("mongodb+srv://pkl_telkom:qwerty-123@cluster0.xv8lg9r.mongodb.net/pkl_telkom", {useNewUrlParser: true});
 
+// mongoose.set("useCreateIndex", true);
+
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
 });
 
+userSchema.plugin(passportLocalMongoose);
+
 const User = new mongoose.model("User", userSchema);
 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+// passport.deserializeUser(function(user, done) {
+//     return done(null, user);
+//   });
 
 
 
@@ -58,34 +82,55 @@ app.get("/", function(req, res){
 
 app.post("/", function(req, res){
 
-    const username = req.body.username;
-    const password = req.body.password;
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
 
-    User.findOne({username: username}, function(err, foundUser){
-        if(err){
-            res.send("Salah Username");
-        }else{
-            if(foundUser){
-                if(foundUser.password === password){
-                    res.redirect("/dashboard");
-                }else{
-                    res.render("wrongPassword.ejs");}
-            }else{
-                res.render("wrongPassword.ejs");
-            }
-        }
-    })
+
+    req.login(user, function(err) {
+        if (err) { return next(err); }
+        return res.redirect('/dashboard');
+      });
+
+    // const username = req.body.username;
+    // const password = req.body.password;
+
+    // User.findOne({username: username}, function(err, foundUser){
+    //     if(err){
+    //         res.send("Salah Username");
+    //     }else{
+    //         if(foundUser){
+    //             if(foundUser.password === password){
+    //                 res.redirect("/dashboard");
+    //             }else{
+    //                 res.render("wrongPassword.ejs");}
+    //         }else{
+    //             res.render("wrongPassword.ejs");
+    //         }
+    //     }
+    // })
 
 
 });
 
-// app.get("/wrongPassword", function(req, res){
-//     res.render("wrongPassword.ejs");
-// })
+app.get('/logout', function(req, res, next){
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+  });
+
+
 
 app.get("/dashboard", function(req, res){
-    res.render("dashboard.ejs", {currentTime: currentTime});
-})
+    if(req.isAuthenticated()){
+        res.render("dashboard.ejs", {currentTime: currentTime});
+    }else{
+        res.render("wrongPassword.ejs");
+    }
+    
+});
 
 app.get("/me/:meSubMenu", function(req, res){
     const subMenu = _.startCase(req.params.meSubMenu);
@@ -136,12 +181,9 @@ app.get("/me/:meSubMenu", function(req, res){
 
 app.get("/security/:meSubMenu", async function(req, res){
 
-    function dataSEC(data){
-        console.log(`Security : ${data.SECURITY}`);
-        console.log(`ME : ${data.ME}`);
-        console.log(`HK : ${data.HK}`);
-        console.log('-------------');
-    }
+    const {page=1, limit=10} = req.query;
+
+   
     // Google SpreadSheet
     const doc = new GoogleSpreadsheet('13Bbb6tMZRvUxYeiqW_8xLUKCZCswK51bvHJT2Ww6UdQ');
 
@@ -160,29 +202,45 @@ app.get("/security/:meSubMenu", async function(req, res){
     let sheet = doc.sheetsByIndex[0];
     
         
+    
         
     // read rows
+
     const rows = await sheet.getRows({
         offset: -1,
         limit: 15
+    
     });
 
 
-    // console.log(rows[0]);
+    // Item Pagination
 
-    // rows.forEach(row => {
-        
-    // });
+    let current_page = 1;
+    let rows_per_page = 5;
 
+    let start = (rows_per_page * (current_page-1));
+    // let end = start + rows_per_page;
+    // let paginatedItems = items.slice(start,end);
 
-        
-        
-  
+    const paginatedRows = await sheet.getRows({
+        offset: start,
+        limit: rows_per_page
     
-   
+    });
+
+    // ----------------------
+
+    // Pagination Button
+
+    //------------------
+
+
+
+
+    //   ----------------------------------
 
     const subMenu = _.startCase(req.params.meSubMenu);
-    res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu, rows: rows});
+    res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu, items: rows, paginatedItems: paginatedRows});   
 });
 
 // app.get("/security/sec", function(req, res){
@@ -192,8 +250,6 @@ app.get("/security/:meSubMenu", async function(req, res){
 // app.get("/security/btv", function(req, res){
 //     res.render("security.ejs", {currentTime: currentTime, subdivisi: "Buku Tamu Vendor"});
 // });
-
-
 
 
 app.listen(3000, function(){
