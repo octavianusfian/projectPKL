@@ -1,17 +1,16 @@
 //jshint esversion:6
 
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const ejs = require("ejs");
-const bodyParser = require("body-parser");
-const _ = require("lodash");
-const { GoogleSpreadsheet } = require('google-spreadsheet');
-const fs = require("fs");
-const { google } = require("googleapis");
-const session = require('express-session');
-const passport =  require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
+import express from "express";
+import mongoose from "mongoose";
+import ejs from "ejs";
+import bodyParser from "body-parser";
+import _ from "lodash";
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import fs from "fs";
+import { google } from "googleapis";
+import session from 'express-session';
+import passport  from "passport";
+import passportLocalMongoose from "passport-local-mongoose";
 // const { SetupPagination, PaginationButton } = require('./pagination');
 
 
@@ -55,7 +54,6 @@ const currentTime = `${hours} | ${day}, ${time.getDate()} ${month} ${time.getFul
 
 mongoose.connect("mongodb+srv://pkl_telkom:qwerty-123@cluster0.xv8lg9r.mongodb.net/pkl_telkom", {useNewUrlParser: true});
 
-// mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
     username: String,
@@ -69,9 +67,11 @@ const User = new mongoose.model("User", userSchema);
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// passport.deserializeUser(function(user, done) {
-//     return done(null, user);
-//   });
+
+
+// Data
+
+
 
 
 
@@ -81,37 +81,21 @@ app.get("/", function(req, res){
 
 
 app.post("/", function(req, res){
-
     const user = new User({
         username: req.body.username,
         password: req.body.password
     });
 
-
-    req.login(user, function(err) {
-        if (err) { return next(err); }
-        return res.redirect('/dashboard');
-      });
-
-    // const username = req.body.username;
-    // const password = req.body.password;
-
-    // User.findOne({username: username}, function(err, foundUser){
-    //     if(err){
-    //         res.send("Salah Username");
-    //     }else{
-    //         if(foundUser){
-    //             if(foundUser.password === password){
-    //                 res.redirect("/dashboard");
-    //             }else{
-    //                 res.render("wrongPassword.ejs");}
-    //         }else{
-    //             res.render("wrongPassword.ejs");
-    //         }
-    //     }
-    // })
+    
+        req.login(user, function(err) {
+        
+            if (err) { return res.render("wrongPassword.ejs"); }
+            return res.redirect('/dashboard');
+          });
+ 
 
 
+    
 });
 
 app.get('/logout', function(req, res, next){
@@ -181,10 +165,8 @@ app.get("/me/:meSubMenu", function(req, res){
 
 app.get("/security/:meSubMenu", async function(req, res){
 
-    const {page=1, limit=10} = req.query;
+    const current_page = req.query.page || 1;
 
-   
-    // Google SpreadSheet
     const doc = new GoogleSpreadsheet('13Bbb6tMZRvUxYeiqW_8xLUKCZCswK51bvHJT2Ww6UdQ');
 
     const CREDENTIALS = JSON.parse(fs.readFileSync('credentials.json'));
@@ -201,46 +183,32 @@ app.get("/security/:meSubMenu", async function(req, res){
         
     let sheet = doc.sheetsByIndex[0];
     
-        
     
-        
+
     // read rows
 
     const rows = await sheet.getRows({
         offset: -1,
-        limit: 15
-    
     });
 
+    const headerValues = sheet.headerValues;
+    
 
-    // Item Pagination
-
-    let current_page = 1;
     let rows_per_page = 5;
+    
 
     let start = (rows_per_page * (current_page-1));
-    // let end = start + rows_per_page;
-    // let paginatedItems = items.slice(start,end);
+    let end = start + rows_per_page;
+    
 
     const paginatedRows = await sheet.getRows({
         offset: start,
         limit: rows_per_page
-    
-    });
+        });
 
-    // ----------------------
-
-    // Pagination Button
-
-    //------------------
-
-
-
-
-    //   ----------------------------------
 
     const subMenu = _.startCase(req.params.meSubMenu);
-    res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu, items: rows, paginatedItems: paginatedRows});   
+    res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu, items: rows, paginatedItems: paginatedRows, current_page, headerValues});   
 });
 
 // app.get("/security/sec", function(req, res){
@@ -252,7 +220,17 @@ app.get("/security/:meSubMenu", async function(req, res){
 // });
 
 
+
+
 app.listen(3000, function(){
     console.log("Server started in port 3000")
 });
+
+
+
+
+
+
+
+
 

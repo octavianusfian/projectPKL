@@ -1,32 +1,37 @@
+//jshint esversion:6
+
+import items from "../../app.js";
 
 
-function SetupPagination(items){ 
-     let page_count = Math.ceil(items.length/5)
-     for (let i=1; i < page_count + 1; i++){
-       PaginationButton(i, items);
-     }
-}
+// <% const DisplayList = function(items, paginatedItems) {%>
+//      <thead >
+//          <tr >
+//              <th scope="col" style="width: 25%"><%= items[0].TANGGAL%></th>
+//              <th scope="col" style="width: 25%"><%= items[0].SECURITY%></th>
+//              <th scope="col" style="width: 25%"><%= items[0].ME%></th>
+//              <th scope="col" style="width: 25%"><%= items[0].HK%></th>
+//          </tr>
+//      </thead>
    
-function PaginationButton(page,items){ 
-     
-     let listButton = document.createElement('li'); 
-     listButton.classList.add('page-item');
-   
-     let button = document.createElement('a');
-     button.classList.add('page-link');
-     button.innerText = page;
-   
-   
-     button.addEventListener('click', function(){
-      current_page = page;
-       DisplayList(items, rows_per_page, current_page);
-     });
-   
-     listButton.appendChild(button);
-   
-     return listButton;
-   
-}
+//      <% paginatedItems.forEach(item => {%>
+//          <tbody>
+//              <tr>
+//                  <th scope="row"><%= item.TANGGAL%></th>
+//                  <td><%= item.SECURITY%></td>
+//                  <td><%= item.ME%></td>
+//                  <td><%= item.HK%></td>
+//              </tr>
+//          </tbody>
+//      <% }); %>
+//    <% }    %>
+
+
+
+
+
+
+
+
 
 
 

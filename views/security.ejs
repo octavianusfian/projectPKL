@@ -1,15 +1,18 @@
 <!-- Show Tables -->
+
 <% const DisplayList = function(items, paginatedItems) {%>
+
   <thead >
       <tr >
-          <th scope="col" style="width: 25%"><%= items[0].TANGGAL%></th>
-          <th scope="col" style="width: 25%"><%= items[0].SECURITY%></th>
-          <th scope="col" style="width: 25%"><%= items[0].ME%></th>
-          <th scope="col" style="width: 25%"><%= items[0].HK%></th>
+        <% for(i=0; i < headerValues.length; i++){%>
+          <th scope="col" ><%= headerValues[i] %></th>
+        <% }%>
+          
       </tr>
   </thead>
 
   <% paginatedItems.forEach(item => {%>
+    
       <tbody>
           <tr>
               <th scope="row"><%= item.TANGGAL%></th>
@@ -20,6 +23,25 @@
       </tbody>
   <% }); %>
 <% }    %>
+
+<% function SetupPagination(items){ %>
+  
+  <% let page_count = Math.ceil(items.length/5);%>
+
+  <% for (let i=1; i < page_count + 1; i++){%>
+    <% if(i == current_page){%>
+      <li class="page-item">
+        <a class="page-link active" href="/security/SEC?page=<%= i %>"><%= i %></a>
+      </li>
+    <% }else{%>
+      <li class="page-item">
+        <a class="page-link" href="/security/SEC?page=<%= i %>"><%= i %></a>
+      </li>
+    <% }%>
+    
+  <% }%>
+<% }%>
+
 
 
 
@@ -32,7 +54,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
-        <a class="navbar-brand mt-5 mb-5" href="#">
+        <a class="navbar-brand mt-5 mb-5" href="/dashboard">
           <img src="/img/logo.svg" alt="" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,16 +134,17 @@
             <div class="col">
               <table class="table table-bordered" >
 
-              <% DisplayList(items, paginatedItems); %>
-
+                <% DisplayList(items, paginatedItems); %>
+              
               </table>
+              
             </div>
           </div>
 
           <div class="row">
             <div class="col d-flex justify-content-end">
               <nav aria-label="Page navigation example">
-                <ul class="pagination">
+                <ul class="pagination wrapper">
                   <!-- <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
@@ -129,14 +152,7 @@
                   </li> -->
 
                   
-                  <!-- <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-
-
-
-                  
-                  
+                  <% SetupPagination(items); %>
                   
 
 
@@ -164,6 +180,9 @@
   </div>
 
 
+
   
 
 <%- include('partials/footer') %>
+
+
