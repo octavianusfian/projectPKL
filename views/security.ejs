@@ -2,23 +2,27 @@
 
 <% const DisplayList = function(items, paginatedItems) {%>
 
+  
+
   <thead >
       <tr >
-        <% for(i=0; i < headerValues.length; i++){%>
-          <th scope="col" ><%= headerValues[i] %></th>
-        <% }%>
-          
+        <% headerValues.forEach(header => {%>
+          <th scope="col"><%= header%></th>          
+        <% })%>
+ 
       </tr>
   </thead>
 
   <% paginatedItems.forEach(item => {%>
     
       <tbody>
-          <tr>
-              <th scope="row"><%= item.TANGGAL%></th>
-              <td><%= item.SECURITY%></td>
-              <td><%= item.ME%></td>
-              <td><%= item.HK%></td>
+          <tr >
+              <% headerValues.forEach(header => {%>
+
+                <td ><%= item[header] %></td>
+                
+              <% })%>
+              
           </tr>
       </tbody>
   <% }); %>
@@ -81,11 +85,17 @@
               </ul>
             </li>
     
-            <li class="nav-item dropdown active">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle btn btn-danger text-light" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Security</a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li><a class="dropdown-item" href="/security/SEC">SEC</a></li>
-                <li><a class="dropdown-item" href="/security/buku-tamu-vendor">Buku Tamu Vendor</a></li>
+                <li><a class="dropdown-item" href="/security/stagging-room">Stagging Room</a></li>
+                <li><a class="dropdown-item" href="/security/kontrol-gedung">Kontrol Gedung</a></li>
+                <li><a class="dropdown-item" href="/security/KM-barang">KM Barang</a></li>
+                <li><a class="dropdown-item" href="/security/kebersihan-pekerjaan-vendor">Kebersihan Pekerjaan Vendor</a></li>
+                <li><a class="dropdown-item" href="/security/checklist-CCTV-NVR-1">Checklist CCTV NVR 1</a></li>
+                <li><a class="dropdown-item" href="/security/checklist-CCTV-NVR-2">Checklist CCTV NVR 2</a></li>
+                <li><a class="dropdown-item" href="/security/buku-mutasi-jaga">Buku Mutasi Jaga</a></li>
+                <li><a class="dropdown-item" href="/security/buku-checklist-kendaraan">Buku Checklist Kendaraan</a></li>
               </ul>
             </li>
     
@@ -131,8 +141,8 @@
           </div>
 
           <div class="row">
-            <div class="col">
-              <table class="table table-bordered" >
+            <div class="col-11" style="overflow-x:auto; width: 96%;">
+              <table class="table table-bordered"" >
 
                 <% DisplayList(items, paginatedItems); %>
               
@@ -142,7 +152,7 @@
           </div>
 
           <div class="row">
-            <div class="col d-flex justify-content-end">
+            <div class="col d-flex justify-content-end mt-3">
               <nav aria-label="Page navigation example">
                 <ul class="pagination wrapper">
                   <!-- <li class="page-item">

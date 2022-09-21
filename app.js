@@ -162,12 +162,12 @@ app.get("/me/:meSubMenu", function(req, res){
 // });
 
 // // Security
-
+ 
 app.get("/security/:meSubMenu", async function(req, res){
-
+    const subMenu = _.startCase(req.params.meSubMenu);
     const current_page = req.query.page || 1;
 
-    const doc = new GoogleSpreadsheet('13Bbb6tMZRvUxYeiqW_8xLUKCZCswK51bvHJT2Ww6UdQ');
+    const doc = new GoogleSpreadsheet('1LyaobzyN3zB4alg7sIG6Cd-8itGh7SztZ9mhTmQohMo');
 
     const CREDENTIALS = JSON.parse(fs.readFileSync('credentials.json'));
     await doc.useServiceAccountAuth({
@@ -180,8 +180,44 @@ app.get("/security/:meSubMenu", async function(req, res){
     // loads document properties and worksheets
     await doc.loadInfo(); 
 
+    let sheet;
+
+
+    switch (subMenu) {
+        case "Stagging Room":
+            sheet = doc.sheetsByIndex[0];
+            break;
+        case "Kontrol Gedung":
+            sheet = doc.sheetsByIndex[1];
+            break;
+        case "KM Barang":
+            sheet = doc.sheetsByIndex[2];
+            break;
+        case "Kebersihan Pekerjaan Vendor":
+            sheet = doc.sheetsByIndex[3];
+            break;
+        case "Checklist CCTV NVR 1":
+            sheet = doc.sheetsByIndex[4];
+            break;
+        case "Checklist CCTV NVR 2":
+            sheet = doc.sheetsByIndex[5];
+            break;
+        case "Buku Mutasi Jaga":
+            sheet = doc.sheetsByIndex[6];
+            break;
+        case "Buku Checklist Kendaraan":
+            sheet = doc.sheetsByIndex[7];
+            break;
+        default:
+            sheet = doc.sheetsByIndex[0];
+
+            
+    }
+
         
-    let sheet = doc.sheetsByIndex[0];
+    // let sheet = doc.sheetsByIndex[0];
+
+    
     
     
 
@@ -194,7 +230,7 @@ app.get("/security/:meSubMenu", async function(req, res){
     const headerValues = sheet.headerValues;
     
 
-    let rows_per_page = 5;
+    let rows_per_page = 6;
     
 
     let start = (rows_per_page * (current_page-1));
@@ -207,7 +243,7 @@ app.get("/security/:meSubMenu", async function(req, res){
         });
 
 
-    const subMenu = _.startCase(req.params.meSubMenu);
+    
     res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu, items: rows, paginatedItems: paginatedRows, current_page, headerValues});   
 });
 
