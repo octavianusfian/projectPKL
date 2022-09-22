@@ -19,6 +19,8 @@
     "express-session": "^1.17.3",
     "google-spreadsheet": "^3.3.0",
     "googleapis": "^107.0.0",
+    "i": "^0.3.7",
+    "loaddash": "^0.0.1-security",
     "lodash": "^4.17.21",
     "mongoose": "^6.5.2",
     "passport": "^0.6.0",
