@@ -107,6 +107,7 @@ header{
   position: sticky; /*(recomended)*/
   top: 0px;
   box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 }
 
 header h1{
@@ -120,6 +121,11 @@ header p{
 .konten{
   background-color: white;
   min-height: 80vh;
+}
+
+.table-width{
+  overflow-x: auto; 
+  width: 96%;
 }
 
 
@@ -162,7 +168,7 @@ thead{
   padding: 20px;
   background-color: white;
   color: black;
-  width: 32%;
+  width: 100%;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
 }
 
@@ -180,6 +186,31 @@ thead{
   margin-top: 10px;
   margin-bottom: 0px;
 }
+
+.db_title{
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.db_title h2{
+  font-size: 1.4em;
+}
+
+.db_item{
+  height: 210px;
+  width: 24%;
+  border: 1px solid black;
+  background-color: #D62C20;
+  color: white;
+  margin: 5px;
+  
+}
+
+/* .carousel{
+  
+} */
+
+
 
 .garis{
   border-left: 2px solid black;

@@ -1,0 +1,294 @@
+<% const DisplayList = function(items, paginatedItems) {%>
+
+  
+
+  <thead >
+      <tr >
+        <% headerValues.forEach(header => {%>
+          <th scope="col"><%= header%></th>          
+        <% })%>
+ 
+      </tr>
+  </thead>
+
+  <% paginatedItems.forEach(item => {%>
+    
+      <tbody>
+          <tr >
+              <% headerValues.forEach(header => {%>
+
+                <td ><%= item[header] %></td>
+                
+              <% })%>
+              
+          </tr>
+      </tbody>
+  <% }); %>
+<% }    %>
+
+<%- include('partials/header') %>
+
+
+  <div class="d-flex flex-row">
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand mt-5 mb-5" href="/dashboard">
+          <img src="/img/logo.svg" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse px-2" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu">
+            <li class="nav-item">
+              <a class="nav-link btn btn-danger text-light" aria-current="page" href="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown active">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mechanical & Electrical </a>
+              <ul class="dropdown-menu" style="columns: 2;">
+                <li><a class="dropdown-item" href="/me/harian-LVMDP">Harian LVMDP</a></li>
+                <li><a class="dropdown-item" href="/me/cubicle">Cubicle</a></li>
+                <li><a class="dropdown-item" href="/me/harian-PLN">Harian PLN</a></li>
+                <li><a class="dropdown-item" href="/me/log-activities-ME">Log Activities ME </a></li>
+                <li><a class="dropdown-item" href="/me/PDAM">PDAM</a></li>
+                <li><a class="dropdown-item" href="/me/PDU-LT5">PDU LT5</a></li>
+                <li><a class="dropdown-item" href="/me/rect-67">Rect 67</a></li>
+                <li><a class="dropdown-item" href="/me/rect-LT9">Rect LT9</a></li>
+                <li><a class="dropdown-item" href="/me/UPS-IO-LT8">UPS IO LT8</a></li>
+                <li><a class="dropdown-item" href="/me/UPS-IO-LT5">UPS IO LT5</a></li>
+                <li><a class="dropdown-item" href="/me/trafo">Trafo</a></li>
+                <li><a class="dropdown-item" href="/me/temperature-&-humidity-PAC">Temperature & Humidity PAC</a></li>
+                <li><a class="dropdown-item" href="/me/solar">Solar</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown ">
+              <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Security</a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/security/stagging-room">Stagging Room</a></li>
+                <li><a class="dropdown-item" href="/security/kontrol-gedung">Kontrol Gedung</a></li>
+                <li><a class="dropdown-item" href="/security/KM-barang">KM Barang</a></li>
+                <li><a class="dropdown-item" href="/security/kebersihan-pekerjaan-vendor">Kebersihan Pekerjaan Vendor</a></li>
+                <li><a class="dropdown-item" href="/security/checklist-CCTV-NVR-1">Checklist CCTV NVR 1</a></li>
+                <li><a class="dropdown-item" href="/security/checklist-CCTV-NVR-2">Checklist CCTV NVR 2</a></li>
+                <li><a class="dropdown-item" href="/security/buku-mutasi-jaga">Buku Mutasi Jaga</a></li>
+                <li><a class="dropdown-item" href="/security/buku-checklist-kendaraan">Buku Checklist Kendaraan</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Housekeeping </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <a type="button" href="/logout" class="btn btn-danger singOut border mx-2 ">Sign Out</a>
+      </div>
+    </nav>
+
+    <div class="flex-grow-1 container-fluid anyClass ">
+      <header>
+        <div class="row justify-content-between p-4 align-items-center">
+          <div class="col-9">
+            <h1>Dashboard</h1>
+          </div>
+          <div class="col-3 d-flex justify-content-end">
+            <p><%= currentTime%></p>
+          </div>
+        </div>
+      </header>
+      <main class="p-3 mt-3">
+
+        <!-- ME -->
+
+        <div class="row justify-content-center">
+          <div class="col-3 bg-warning db_title d-flex justify-content-center align-items-center">
+            <h2>Mechanical Electrical</h2>
+          </div>
+        </div>
+
+        <div class="row justify-content-center ">
+        <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
+          <div class="carousel-inner ">
+
+            <div class="carousel-item active">
+              <div class="row justify-content-center">
+                <div class="col-11 db_menu">
+                  <div class="container text-center">
+                    <div class="row row-cols-4">
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Harian LVMDP
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Cubicle
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Harian PLN
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Log Activities ME
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        PDAM
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        PDU LT5
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Rect 67
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Rect LT9
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        UPS IO LT8
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        UPS IO LT5
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Trafo
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Temperature & Humidity PAC
+                      </div>
+                      <div class="col db_item d-flex justify-content-center align-items-center">
+                        Solar
+                      </div>
+                      
+                      
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="carousel-item bg-white p-3 table-width ">
+              <table class="table table-bordered " >
+
+                <% DisplayList(items, paginatedItems); %>
+              
+              </table>
+            </div>
+            
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+          <!-- ME -->
+
+          
+
+
+          <!-- SECURITY -->
+          <div class="row justify-content-center">
+            <div class="col-3 bg-warning db_title d-flex justify-content-center align-items-center">
+              <h2>Security</h2>
+            </div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
+              <div class="carousel-inner ">
+    
+                <div class="carousel-item active">
+                  <div class="row justify-content-center">
+                    <div class="col-11 db_menu">
+                      <div class="container text-center">
+                        <div class="row row-cols-4">
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Stagging Room
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Kontrol Gedung
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            KM Barang
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Kebersihan Pekerjaan Vendor
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Checklist CCTV NVR 1
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Checklist CCTV NVR 2
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Buku Mutasi Jaga
+                          </div>
+                          <div class="col db_item d-flex justify-content-center align-items-center">
+                            Buku Checklist Kendaraan
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+                <div class="carousel-item bg-white p-3 table-width ">
+                  <table class="table table-bordered " >
+    
+                    <% DisplayList(items, paginatedItems); %>
+                  
+                  </table>
+                </div>
+                
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+              
+            
+          </div>
+          <!-- SECURITY -->
+          
+
+          
+        <!-- </section> -->
+      </main>
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<%- include('partials/footer') %>

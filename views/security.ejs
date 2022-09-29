@@ -35,11 +35,11 @@
   <% for (let i=1; i < page_count + 1; i++){%>
     <% if(i == current_page){%>
       <li class="page-item">
-        <a class="page-link active" href="/security/SEC?page=<%= i %>"><%= i %></a>
+        <a class="page-link active" href="?page=<%= i %>"><%= i %></a>
       </li>
     <% }else{%>
       <li class="page-item">
-        <a class="page-link" href="/security/SEC?page=<%= i %>"><%= i %></a>
+        <a class="page-link" href="?page=<%= i %>"><%= i %></a>
       </li>
     <% }%>
     
@@ -71,7 +71,7 @@
             </li>
             <li class="nav-item dropdown active">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Mechanical & Electrical </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="columns: 2;">
                 <li><a class="dropdown-item" href="/me/harian-LVMDP">Harian LVMDP</a></li>
                 <li><a class="dropdown-item" href="/me/cubicle">Cubicle</a></li>
                 <li><a class="dropdown-item" href="/me/harian-PLN">Harian PLN</a></li>
@@ -144,7 +144,7 @@
           </div>
 
           <div class="row">
-            <div class="col-11" style="overflow-x:auto; width: 96%;">
+            <div class="col-11 table-width" >
               <table class="table table-bordered"" >
 
                 <% DisplayList(items, paginatedItems); %>
