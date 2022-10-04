@@ -1,17 +1,15 @@
-<% const DisplayList = function(items, paginatedItems) {%>
-
-  
+<% const DisplayListME = function(items, paginatedItems) {%>
 
   <thead >
-      <tr >
+      <tr>
         <% headerValues.forEach(header => {%>
-          <th scope="col"><%= header%></th>          
+          <th scope="col" ><%= header%></th>          
         <% })%>
  
       </tr>
   </thead>
 
-  <% paginatedItems.forEach(item => {%>
+  <% items.forEach(item => {%>
     
       <tbody>
           <tr >
@@ -25,6 +23,33 @@
       </tbody>
   <% }); %>
 <% }    %>
+
+<% const DisplayListSecurity = function(items2, paginatedItems2) {%>
+
+  <thead >
+      <tr >
+        <% headerValues2.forEach(header => {%>
+          <th scope="col"><%= header%></th>          
+        <% })%>
+ 
+      </tr>
+  </thead>
+
+  <% paginatedItems2.forEach(item => {%>
+    
+      <tbody>
+          <tr >
+              <% headerValues2.forEach(header => {%>
+
+                <td ><%= item[header] %></td>
+                
+              <% })%>
+              
+          </tr>
+      </tbody>
+  <% }); %>
+<% }    %>
+
 
 <%- include('partials/header') %>
 
@@ -108,63 +133,37 @@
         <!-- ME -->
 
         <div class="row justify-content-center">
-          <div class="col-3 bg-warning db_title d-flex justify-content-center align-items-center">
+          <div class="col-11  border border-2 border-danger bg-white db_title d-flex justify-content-center align-items-center" style="width: 98%;">
             <h2>Mechanical Electrical</h2>
           </div>
         </div>
 
-        <div class="row justify-content-center ">
-        <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="row justify-content-center" style="height: 500px;">
+        <div id="carousel-me" class="carousel slide mb-5" data-interval="false">
           <div class="carousel-inner ">
 
             <div class="carousel-item active">
               <div class="row justify-content-center">
                 <div class="col-11 db_menu">
                   <div class="container text-center">
-                    <div class="row row-cols-4">
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Harian LVMDP
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Cubicle
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Harian PLN
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Log Activities ME
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        PDAM
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        PDU LT5
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Rect 67
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Rect LT9
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        UPS IO LT8
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        UPS IO LT5
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Trafo
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Temperature & Humidity PAC
-                      </div>
-                      <div class="col db_item d-flex justify-content-center align-items-center">
-                        Solar
-                      </div>
-                      
-                      
-                    </div>
 
+
+
+                    <div class="row row-cols-6 justify-content-center">
+                      <% titleSheetsME.forEach(title => { %>
+                        <div class="col d-flex flex-column db_item">
+
+                          <div class="db_text d-flex justify-content-center align-items-center">
+                            <h5><%= title %></h5>
+                          </div>
+
+                          <div class="db_image">
+                            
+                          </div>
+
+                        </div>
+                      <% }) %>  
+                    </div>
 
                   </div>
                 </div>
@@ -172,19 +171,19 @@
 
             </div>
             <div class="carousel-item bg-white p-3 table-width ">
-              <table class="table table-bordered " >
+              <table class="table table-hover table-bordered" >
 
-                <% DisplayList(items, paginatedItems); %>
+                <% DisplayListME(items, paginatedItems); %>
               
               </table>
             </div>
             
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-me" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-me" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -196,64 +195,55 @@
 
           <!-- SECURITY -->
           <div class="row justify-content-center">
-            <div class="col-3 bg-warning db_title d-flex justify-content-center align-items-center">
+            <div class="col-11  border border-2 border-danger bg-white db_title d-flex justify-content-center align-items-center" style="width: 98%;">
               <h2>Security</h2>
             </div>
           </div>
 
           <div class="row justify-content-center">
-            <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div id="carousel-sec" class="carousel slide mb-5" data-interval="false">
               <div class="carousel-inner ">
     
                 <div class="carousel-item active">
                   <div class="row justify-content-center">
                     <div class="col-11 db_menu">
                       <div class="container text-center">
-                        <div class="row row-cols-4">
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Stagging Room
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Kontrol Gedung
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            KM Barang
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Kebersihan Pekerjaan Vendor
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Checklist CCTV NVR 1
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Checklist CCTV NVR 2
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Buku Mutasi Jaga
-                          </div>
-                          <div class="col db_item d-flex justify-content-center align-items-center">
-                            Buku Checklist Kendaraan
-                          </div>
+
+                        <div class="row row-cols-5">
+                          <% titleSheetsSecurity.forEach(title => { %>
+                            <div class="col d-flex flex-column db_item_2">
+
+                              <div class="db_text d-flex justify-content-center align-items-center">
+                                <h5><%= title %></h5>
+                              </div>
+    
+                              <div class="db_image">
+                                
+                              </div>
+    
+                            </div>
+                          <% }) %> 
                         </div>
+
                       </div>
                     </div>
                   </div>
     
                 </div>
-                <div class="carousel-item bg-white p-3 table-width ">
-                  <table class="table table-bordered " >
+                <div class="carousel-item bg-white p-3 table-width " style="height: 380px">
+                  <table class="table table-bordered table-hover" >
     
-                    <% DisplayList(items, paginatedItems); %>
+                    <% DisplayListSecurity(items2, paginatedItems2 ); %>
                   
                   </table>
                 </div>
                 
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sec" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <button class="carousel-control-next" type="button" data-bs-target="#carousel-sec" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>

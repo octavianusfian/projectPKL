@@ -125,7 +125,9 @@ header p{
 
 .table-width{
   overflow-x: auto; 
-  width: 96%;
+  width: 100%;
+  height: 490px;
+  overflow-y: scroll;
 }
 
 
@@ -192,39 +194,69 @@ thead{
   padding: 20px;
 }
 
+
+
 .db_title h2{
   font-size: 1.4em;
 }
 
 .db_item{
-  height: 210px;
-  width: 24%;
-  border: 1px solid black;
-  background-color: #D62C20;
-  color: white;
+  height: 20vh;
+  width: 19%;
+  /* border: 1px solid black; */
+  background-color: white;
+  color: black;
+  border: 2px solid red;
   margin: 5px;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 10px;
   
 }
 
-/* .carousel{
-  
-} */
+.db_text{
+  width: 100%;
+  height: 60%;
+  /* border: 1px solid black; */
+}
 
-
-
-.garis{
-  border-left: 2px solid black;
-  
+.db_image{
+  background-image: url("/img/OBJECTS.svg");
+  /* border: 1px solid black; */
+  width: 100.5%;
+  height: 40% ;
+  border-radius: 0 0 10px 10px;
 }
 
 
 
-.grafikMenu{
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #D62C20;
+.db_item_2{
+  height: 20vh;
+  width: 23%;
+  /* border: 1px solid black; */
+  background-color: white;
+  color: black;
+  border: 2px solid red;
+  margin: 5px;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 10px;
+  
 }
+
+.carousel-control-prev,
+.carousel-control-next {
+  height: 15%;
+  
+  top: 37.5%;
+};
+
+
+table, th, td {
+  border: 2px solid black;
+}
+
+
 
 .anyClass {
   height:100vh;
