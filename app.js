@@ -1,5 +1,7 @@
 //jshint esversion:6
 
+// ---------------- Import NPM -------------------
+
 import express from "express";
 import mongoose from "mongoose";
 import ejs from "ejs";
@@ -7,18 +9,18 @@ import bodyParser from "body-parser";
 import _ from "lodash";
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import fs from "fs";
-import { google } from "googleapis";
 import session from 'express-session';
 import passport  from "passport";
 import passportLocalMongoose from "passport-local-mongoose";
-// const { SetupPagination, PaginationButton } = require('./pagination');
+import currentTime from "./time.js";
 
+// ----------------------------------
 
 const app = express();
 
 app.use(express.static("public"));
-app.set('view engine', 'ejs');
 
+app.set('view engine', 'ejs');
 
 app.use(session({
     secret: "this is our secret",
@@ -31,26 +33,11 @@ app.use(passport.session());
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-const time = new Date();
 
-const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 
-let day = days[time.getDay()];
+// ------------------------------------------
 
-const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-
-let month = months[time.getMonth()];
-
-function addZero(i) {
-    if (i < 10) {i = "0" + i}
-    return i;
-  }
-  
-let h = addZero(time.getHours());
-let m = addZero(time.getMinutes());
-let hours = h + ":" + m ;
-
-const currentTime = `${hours} | ${day}, ${time.getDate()} ${month} ${time.getFullYear()}`;
+// ------------------- Connect to mongoose-----------------
 
 mongoose.connect("mongodb+srv://pkl_telkom:qwerty-123@cluster0.xv8lg9r.mongodb.net/pkl_telkom", {useNewUrlParser: true});
 
@@ -69,7 +56,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-// Data
+// ------------------------------------
+
+
+// ----------------- Routing -----------------------
 
 
 app.get("/", function(req, res){
@@ -90,9 +80,6 @@ app.post("/", function(req, res){
             return res.redirect('/dashboard');
           });
  
-
-
-    
 });
 
 app.get('/logout', function(req, res, next){
@@ -101,8 +88,6 @@ app.get('/logout', function(req, res, next){
       res.redirect('/');
     });
   });
-
-
 
 app.get("/dashboard", async function(req, res){
     if(req.isAuthenticated()){
@@ -150,8 +135,6 @@ app.get("/dashboard", async function(req, res){
             offset: start,
             limit: rows_per_page
             });
-
-
         //-------------------
         
         // --------------- Security --------------
@@ -199,14 +182,7 @@ app.get("/dashboard", async function(req, res){
             });
         
         // ------------------------------------
-
-
-
-            
-    
-    
-        
-        res.render("dashboard_new.ejs", {currentTime: currentTime, items: rows, items2: rows2, paginatedItems: paginatedRows,paginatedItems2: paginatedRows2, current_page, headerValues, headerValues2, titleSheetsME, titleSheetsSecurity}); 
+        res.render("dashboard.ejs", {currentTime: currentTime, items: rows, items2: rows2, paginatedItems: paginatedRows,paginatedItems2: paginatedRows2, current_page, headerValues, headerValues2, titleSheetsME, titleSheetsSecurity}); 
 
         
     }else{
@@ -231,7 +207,7 @@ app.get("/me/:meSubMenu", async function(req, res){
     });
         
     // loads document properties and worksheets
-     await doc.loadInfo(); 
+    await doc.loadInfo(); 
 
     let sheet;
 
@@ -281,14 +257,6 @@ app.get("/me/:meSubMenu", async function(req, res){
 
             
     }
-
-        
-    // let sheet = doc.sheetsByIndex[0];
-
-    
-    
-    
-
     // read rows
 
     const rows = await sheet.getRows({
@@ -368,13 +336,6 @@ app.get("/security/:meSubMenu", async function(req, res){
 
             
     }
-
-        
-
-    
-    
-    
-
     // read rows
 
     const rows = await sheet.getRows({
@@ -401,17 +362,8 @@ app.get("/security/:meSubMenu", async function(req, res){
     res.render("security.ejs", {currentTime: currentTime, subdivisi: subMenu, items: rows, paginatedItems: paginatedRows, current_page, headerValues});   
 });
 
-// app.get("/security/sec", function(req, res){
-//     res.render("security.ejs", {currentTime: currentTime, subdivisi: "SEC"});
-// });
 
-// app.get("/security/btv", function(req, res){
-//     res.render("security.ejs", {currentTime: currentTime, subdivisi: "Buku Tamu Vendor"});
-// });
-
-
-
-
+// ---------------------------------------
 app.listen(3000, function(){
     console.log("Server started in port 3000")
 });

@@ -1,9 +1,6 @@
 <!-- Show Tables -->
 
 <% const DisplayList = function(items, paginatedItems) {%>
-
-  
-
   <thead >
       <tr >
         <% headerValues.forEach(header => {%>
@@ -45,9 +42,6 @@
     
   <% }%>
 <% }%>
-
-
-
 
 <!--  -->
 <%- include('partials/header') %>
@@ -121,7 +115,7 @@
       <header>
         <div class="row justify-content-between p-4 align-items-center">
           <div class="col-9">
-            <h1>Security</h1>
+            <h1 class="text-overlay">Security</h1>
           </div>
           <div class="col-3 d-flex justify-content-end">
             <p><%= currentTime%></p>
@@ -129,7 +123,7 @@
         </div>
       </header>
       <main class="py-4 ">
-        <section class="konten p-3">
+        <section class="konten p-3 ">
           <div class="row mb-4">
             <div class="col-9">
               <h3><%= subdivisi%></h3>
@@ -144,7 +138,7 @@
           </div>
 
           <div class="row">
-            <div class="col-11 table-width" >
+            <div class="col-11 table-width2" >
               <table class="table table-bordered"" >
 
                 <% DisplayList(items, paginatedItems); %>
@@ -158,14 +152,9 @@
             <div class="col d-flex justify-content-end mt-3">
               <nav aria-label="Page navigation example">
                 <ul class="pagination wrapper">
-                  
 
-                  
                   <% SetupPagination(items); %>
-                  
 
-
-                  
                 </ul>
               </nav>
             </div>
@@ -175,20 +164,9 @@
         </section>
       </main>
 
-
-
-
-
-
-
-
     </div>
 
   </div>
-
-
-
-  
 
 <%- include('partials/footer') %>
 
