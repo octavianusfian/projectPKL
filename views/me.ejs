@@ -1,3 +1,5 @@
+
+<!-- Membuat tabel ME -->
 <% const DisplayList = function(items, paginatedItems) {%>
   <thead >
       <tr >
@@ -8,6 +10,7 @@
       </tr>
   </thead>
 
+  
   <% paginatedItems.forEach(item => {%>
       <tbody>
           <tr >
@@ -21,6 +24,8 @@
   <% }); %>
 <% }    %>
 
+
+<!-- Membuat Tombol dan halaman Pagination -->
 <% function SetupPagination(items){ %>
   
   <% let page_count = Math.ceil(items.length/5);%>
@@ -43,6 +48,7 @@
 
   <div class="d-flex flex-row">
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <a class="navbar-brand mt-5 mb-5" href="/dashboard">
@@ -103,7 +109,10 @@
         <button type="button" class="btn btn-danger singOut border mx-2 ">Sign Out</button>
       </div>
     </nav>
+    <!-- ---------------- -->
 
+
+    <!-- Judul Halaman -->
     <div class="flex-grow-1 container-fluid anyClass">
       <header>
         <div class="row justify-content-between p-4 align-items-center">
@@ -115,7 +124,9 @@
           </div>
         </div>
       </header>
+      <!-- -------------- -->
 
+      <!-- Tabel ME -->
       <main class="py-4">
         <section class="konten p-3">
           <div class="row mb-4">
@@ -131,6 +142,7 @@
             </div>
           </div>
 
+          <!-- Memanggil Fungsi Tabel ME -->
           <div class="row">
             <div class="col-11 table-width2">
               <table class="table table-bordered"" >
@@ -142,6 +154,7 @@
             </div>
           </div>
 
+          <!-- Memanggil fungsi pagination -->
           <div class="row">
             <div class="col d-flex justify-content-end mt-3">
               <nav aria-label="Page navigation example">

@@ -16,7 +16,7 @@ import currentTime from "./time.js";
 
 // ----------------------------------
 
-const app = express();
+const app = express(); // Framework Node Js
 
 app.use(express.static("public"));
 
@@ -95,7 +95,7 @@ app.get("/dashboard", async function(req, res){
         // --------------------- ME ------------------------
         let titleSheetsME = [];
         
-
+        // Mengambil data ME dari spreadsheet
         const doc = new GoogleSpreadsheet('18EULY4UqHcN8V9uiagp3yjPpVh67pzlHquDObx3YTr8');
 
         const CREDENTIALS = JSON.parse(fs.readFileSync('credentials.json'));
@@ -115,7 +115,7 @@ app.get("/dashboard", async function(req, res){
 
         let sheet = doc.sheetsByIndex[0];
 
-        // create rows
+        // create table
 
         const rows = await sheet.getRows({
             offset: -1,
@@ -192,10 +192,11 @@ app.get("/dashboard", async function(req, res){
 });
 
 app.get("/me/:meSubMenu", async function(req, res){
+    //Create Submenu
     const subMenu = _.startCase(req.params.meSubMenu);
     const current_page = req.query.page || 1;
 
-    
+    //Mengambil data ME dari Spreadsheet
     const doc = new GoogleSpreadsheet('18EULY4UqHcN8V9uiagp3yjPpVh67pzlHquDObx3YTr8');
 
     const CREDENTIALS = JSON.parse(fs.readFileSync('credentials.json'));
@@ -211,7 +212,7 @@ app.get("/me/:meSubMenu", async function(req, res){
 
     let sheet;
 
-
+    //Mengambil Submenu dari index sheet
     switch (subMenu) {
         case "Harian LVMDP":
             sheet = doc.sheetsByIndex[0];
@@ -257,7 +258,7 @@ app.get("/me/:meSubMenu", async function(req, res){
 
             
     }
-    // read rows
+    // create table
 
     const rows = await sheet.getRows({
         offset: -1,
@@ -287,9 +288,11 @@ app.get("/me/:meSubMenu", async function(req, res){
 // // Security
  
 app.get("/security/:meSubMenu", async function(req, res){
+    //Create Submenu
     const subMenu = _.startCase(req.params.meSubMenu);
     const current_page = req.query.page || 1;
 
+    //Mengambil Data dari spreadsheet
     const doc = new GoogleSpreadsheet('1LyaobzyN3zB4alg7sIG6Cd-8itGh7SztZ9mhTmQohMo');
 
     const CREDENTIALS = JSON.parse(fs.readFileSync('credentials.json'));
@@ -305,7 +308,7 @@ app.get("/security/:meSubMenu", async function(req, res){
 
     let sheet;
 
-
+    //Mengambil Submenu dari index sheet
     switch (subMenu) {
         case "Stagging Room":
             sheet = doc.sheetsByIndex[0];
@@ -336,7 +339,7 @@ app.get("/security/:meSubMenu", async function(req, res){
 
             
     }
-    // read rows
+    // create tabel
 
     const rows = await sheet.getRows({
         offset: -1,
@@ -363,7 +366,7 @@ app.get("/security/:meSubMenu", async function(req, res){
 });
 
 
-// ---------------------------------------
+// Lokasi server
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;
